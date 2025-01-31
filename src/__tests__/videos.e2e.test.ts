@@ -266,6 +266,31 @@ describe("put by id /videos", () => {
         ]);
     })
 
+    it("should return error for invalid title and canBeDownloaded", async () => {
+        const res = await req
+            .put(`${SETTINGS.PATH.VIDEOS}/${defaultVideo.id}`)
+            .send({
+                title: null,
+                author: "valid author",
+                availableResolutions:["P144","P240","P720"],
+                "canBeDownloaded":"string",
+                "minAgeRestriction":17,
+                "publicationDate":"2025-02-03T06:02:38.822Z"
+            })
+            .expect(400)
+
+        expect(res.body.errorsMessages).toEqual([
+            {
+                field: "title",
+                message: "empty value"
+            },
+            {
+                field: "canBeDownloaded",
+                message: "value must be boolean"
+            }
+        ]);
+    })
+
     it("should return error for invalid minAgeRestriction and publicationDate", async () => {
         const res = await req
             .put(`${SETTINGS.PATH.VIDEOS}/${defaultVideo.id}`)

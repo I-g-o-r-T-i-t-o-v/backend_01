@@ -16,7 +16,7 @@ import {
 } from "./types";
 import { ErrorFieldType } from "../types/types";
 import {
-    availableResolutionsFieldValidator,
+    availableResolutionsFieldValidator, booleanFieldValidator,
     isoDateFieldValidator, numberFieldValidator,
     stringFieldValidator
 } from "./validators";
@@ -126,6 +126,11 @@ const videoController = {
                 errorsArray
             });
             availableResolutionsFieldValidator({availableResolutions, errorsArray});
+            booleanFieldValidator({
+                fieldName: "canBeDownloaded",
+                value: canBeDownloaded,
+                errorsArray
+            });
             numberFieldValidator({
                 fieldName: "minAgeRestriction",
                 value: minAgeRestriction,

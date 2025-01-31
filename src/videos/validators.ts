@@ -70,6 +70,28 @@ export const numberFieldValidator = (
     }
 }
 
+export const booleanFieldValidator = (
+    {
+        fieldName,
+        value,
+        errorsArray
+    }: {
+        fieldName: string;
+        value: boolean;
+        errorsArray: ErrorFieldType[]
+    }): void => {
+    if(value === undefined){
+        return;
+    }
+
+    if (typeof value !== "boolean") {
+        errorsArray.push({
+            field: fieldName,
+            message: "value must be boolean"
+        })
+    }
+}
+
 export const isoDateFieldValidator = (
     {
         fieldName,

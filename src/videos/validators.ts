@@ -14,11 +14,12 @@ export const stringFieldValidator = (
         maxLength: number;
         errorsArray: ErrorFieldType[]
     }): void => {
-    if (!value || value === "null" || value.trim().length < 1) {
+    if (!value || value.trim().length < 1) {
         errorsArray.push({
             field: fieldName,
             message: "empty value"
         })
+        return;
     }
 
     if (typeof value !== "string") {
@@ -28,7 +29,7 @@ export const stringFieldValidator = (
         })
     }
 
-    if (value.trim().length > maxLength) {
+    if (value?.trim().length > maxLength) {
         errorsArray.push({
             field: fieldName,
             message: `max length is ${maxLength}`

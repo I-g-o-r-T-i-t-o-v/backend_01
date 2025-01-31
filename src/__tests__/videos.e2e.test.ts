@@ -123,6 +123,20 @@ describe("post /videos", () => {
         ]);
     })
 
+    it("should return error for title equal null", async () => {
+        const res = await req
+            .post(SETTINGS.PATH.VIDEOS)
+            .send({title: null, author: "valid author", "availableResolutions":["P144","P240","P720"]})
+            .expect(400)
+
+        expect(res.body.errorsMessages).toEqual([
+            {
+                field: "title",
+                message: "empty value"
+            },
+        ]);
+    })
+
     it("should return error for too long title and author", async () => {
         const res = await req
             .post(SETTINGS.PATH.VIDEOS)

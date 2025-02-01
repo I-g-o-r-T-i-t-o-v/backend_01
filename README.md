@@ -1,0 +1,3 @@
+### Endpoints:
+#### /videos
+#### /testing
